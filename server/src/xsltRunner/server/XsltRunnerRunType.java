@@ -46,36 +46,6 @@ public class XsltRunnerRunType extends RunType {
         sb.append(" \n");
         sb.append("XSL File: ");
         sb.append(parameters.get(PluginConstants.PROPERTY_XSL_PATH));
-        sb.append(" \n");
-        sb.append("Project: ");
-        sb.append(parameters.get(PluginConstants.PROPERTY_PROJECT_PATH));
-        sb.append(" \n");
-        sb.append("Error / Warning Line List: ");
-        sb.append(parameters.get(PluginConstants.PROPERTY_LINELIST_PATH));
-        sb.append(" \n");
-        sb.append("Build Player: ");
-        sb.append(parameters.get(PluginConstants.PROPERTY_BUILD_PLAYER));
-        sb.append(" \n");
-        sb.append("Output directory: ");
-        sb.append(parameters.get(PluginConstants.PROPERTY_BUILD_PATH));
-        sb.append(" \n");
-        sb.append("Extra options: ");
-        sb.append(parameters.get(PluginConstants.PROPERTY_BUILD_EXTRA));
-
-        String executeMethod = parameters.get(PluginConstants.PROPERTY_EXECUTE_METHOD);
-        if (executeMethod != null && !executeMethod.isEmpty()) {
-            sb.append(" \n");
-            sb.append("Execute Method: ");
-            sb.append(executeMethod);
-        }
-
-        String logIgnore = parameters.get(PluginConstants.PROPERTY_LOG_IGNORE);
-        if (logIgnore != null && "true".equals(logIgnore)) {
-            String ignoreLogText = parameters.get(PluginConstants.PROPERTY_LOG_IGNORE_TEXT);
-            sb.append(" \n");
-            sb.append("Ignore Log Before: ");
-            sb.append(ignoreLogText);
-        }
 
         return sb.toString();
     }
