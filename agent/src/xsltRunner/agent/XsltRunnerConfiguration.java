@@ -22,9 +22,10 @@ public class XsltRunnerConfiguration {
         Mac
     }
 
-    final String inputPath;
-    final String outputPath;
-    final String xslPath;
+    final String[] inputPath = new String[10];
+    final String[] outputPath = new String[10];
+    final String[] xslPath = new String[10];
+    final int configsCount;
 
     final boolean quit;
     final boolean batchMode;
@@ -67,12 +68,17 @@ public class XsltRunnerConfiguration {
 
         pluginMsxslPath = agentConfiguration.getAgentPluginsDirectory().getPath() + "//" + PluginConstants.RUN_TYPE + "//msxsl.exe";
 
-        inputPath = FilenameUtils.separatorsToSystem(
-                Parameters.getString(runnerParameters, PluginConstants.PROPERTY_INPUT_PATH));
-        outputPath = FilenameUtils.separatorsToSystem(
-                Parameters.getString(runnerParameters, PluginConstants.PROPERTY_OUTPUT_PATH));
-        xslPath = FilenameUtils.separatorsToSystem(
-                Parameters.getString(runnerParameters, PluginConstants.PROPERTY_XSL_PATH));
+        configsCount = Integer.parseInt(FilenameUtils.separatorsToSystem(
+                Parameters.getString(runnerParameters, PluginConstants.PROPERTY_CONFIGS_COUNT)));
+
+        for(int i=0;i<configsCount;i++) {
+            inputPath[i] = FilenameUtils.separatorsToSystem(
+                    Parameters.getString(runnerParameters, PluginConstants.PROPERTY_INPUT_PATH + '_' + i));
+            outputPath[i] = FilenameUtils.separatorsToSystem(
+                    Parameters.getString(runnerParameters, PluginConstants.PROPERTY_OUTPUT_PATH + '_' + i));
+            xslPath[i] = FilenameUtils.separatorsToSystem(
+                    Parameters.getString(runnerParameters, PluginConstants.PROPERTY_XSL_PATH + '_' +  i));
+        }
 
         quit = Parameters.getBoolean(runnerParameters, PluginConstants.PROPERTY_QUIT);
         showMe = Parameters.getBoolean(runnerParameters, PluginConstants.PROPERTY_SHOW_ME);

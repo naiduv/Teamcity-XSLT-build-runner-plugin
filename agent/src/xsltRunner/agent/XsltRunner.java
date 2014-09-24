@@ -42,21 +42,28 @@ public class XsltRunner {
     List<String> getArgs() {
         List<String> args = new ArrayList<String>();
 
-        if (!configuration.inputPath.equals("")) {
-//            args.add("-inputPath");
-            args.add(configuration.inputPath);
-        }
+        for (int i = 0; i < configuration.configsCount; i++) {
+            if(i==0)
+                args.add("/c");
+            else
+                args.add("&");
 
-        if (!configuration.xslPath.equals("")) {
-//            args.add("-xslPath");
-            args.add(configuration.xslPath);
-        }
+            args.add(configuration.pluginMsxslPath);
 
-        if (!configuration.outputPath.equals("")) {
-            args.add("-o");
-            args.add(configuration.outputPath);
-        }
+            if (!configuration.inputPath[i].equals("")) {
+                args.add(configuration.inputPath[i]);
+            }
 
+            if (!configuration.xslPath[i].equals("")) {
+                args.add(configuration.xslPath[i]);
+            }
+
+            if (!configuration.outputPath[i].equals("")) {
+                args.add("-o");
+                args.add(configuration.outputPath[i]);
+            }
+
+        }
 //
 //
 //

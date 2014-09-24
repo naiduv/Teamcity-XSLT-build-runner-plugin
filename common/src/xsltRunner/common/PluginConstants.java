@@ -14,6 +14,7 @@ public interface PluginConstants {
     final String PROPERTY_INPUT_PATH = "argument.input_path";
     final String PROPERTY_OUTPUT_PATH = "argument.output_path";
     final String PROPERTY_XSL_PATH = "argument.xsl_path";
+    final String PROPERTY_CONFIGS_COUNT = "argument.configs_count";
 
 
     final String PROPERTY_SHOW_ME = "argument.show_me";

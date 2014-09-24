@@ -5,6 +5,17 @@
 
 <jsp:useBean id="propertiesBean" scope="request" type="jetbrains.buildServer.controllers.BasePropertiesBean"/>
 
+<%@ include file="xsltrunner.js" %>
+
+<tr style="display:none">
+    <th>
+    </th>
+    <td>
+        <props:textProperty name="argument.configs_count" style="width:32em;"/>
+    </td>
+</tr>
+
+
 <tr>
     <th>
         <label for="teamcity.build.workingDir">Working Directory: </label>
@@ -18,13 +29,22 @@
     </td>
 </tr>
 
+
+<% int server_configs_count = Integer.parseInt(propertiesBean.getProperties().get("argument.configs_count")); %>
+<% for(int i=0;i<server_configs_count;i++) {
+    String input_path = "argument.input_path_" + i;
+    String output_path = "argument.output_path_" + i;
+    String xsl_path = "argument.xsl_path_" + i;
+    String current_id = "configs_" + i;
+
+    %>
+<tbody id=<%=current_id%>>
 <tr>
     <th>
-        <label for="argument.input_path">Input path: </label>
+        <label for=<%= input_path %>>Input path: </label>
     </th>
     <td>
-        <props:textProperty name="argument.input_path" style="width:32em;"/>
-        <span class="error" id="error_argument.input_path"></span>
+        <props:textProperty name="<%= input_path %>" style="width:32em;"/>
         <span class="smallNote">
              Input file to msxsl.exe
         </span>
@@ -33,11 +53,10 @@
 
 <tr>
     <th>
-        <label for="argument.xsl_path">XSL file path: </label>
+        <label for=<%= xsl_path %>>XSL file path: </label>
     </th>
     <td>
-        <props:textProperty name="argument.xsl_path" style="width:32em;"/>
-        <span class="error" id="error_argument.xsl_path"></span>
+        <props:textProperty name="<%= xsl_path %>" style="width:32em;"/>
         <span class="smallNote">
              XSL file required for conversion.
         </span>
@@ -46,13 +65,24 @@
 
 <tr>
     <th>
-        <label for="argument.output_path">Output path: </label>
+        <label for=<%= output_path %> >Output path: </label>
     </th>
     <td>
-        <props:textProperty name="argument.output_path" style="width:32em;"/>
-        <span class="error" id="error_argument.output_path"></span>
+        <props:textProperty name="<%= output_path %>"  style="width:32em;"/>
         <span class="smallNote">
              Output file to msxsl.exe
         </span>
     </td>
+</tr>
+
+</tbody>
+
+<%}%>
+
+
+<%-- HACK: save session on add/remove error because this jsp page on first load thru the runners dropdown will not load javascript, not sure why.. --%>
+<%-- In the add case, we update the configs_count so it appears like it worked, and then reload. for error, just save session and reload --%>
+<tr>
+<th id="config-adder"><a style="color: #ff8c00; font-weight:normal" href="#" onclick="try{ addConfig(); } catch(err) {   document.getElementById('argument.configs_count').value = 2; BS.EditBuildRunnerForm.saveInSession(); location.reload() } return false;">Add transform set</a></th>
+<td id="config-remover"><a style="color: #ff8c00; font-weight:normal" href="#" onclick="try{ removeConfig(); } catch(err) { BS.EditBuildRunnerForm.saveInSession(); location.reload() } return false;"">Remove transform set</a></td>
 </tr>

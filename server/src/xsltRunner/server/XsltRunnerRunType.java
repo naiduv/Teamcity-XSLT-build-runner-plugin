@@ -37,16 +37,19 @@ public class XsltRunnerRunType extends RunType {
     public String describeParameters(@NotNull final Map<String, String> parameters)
     {
         StringBuilder sb = new StringBuilder();
-
-        sb.append("Input: ");
-        sb.append(parameters.get(PluginConstants.PROPERTY_INPUT_PATH));
-        sb.append(" \n");
-        sb.append("Ouput: ");
-        sb.append(parameters.get(PluginConstants.PROPERTY_OUTPUT_PATH));
-        sb.append(" \n");
-        sb.append("XSL File: ");
-        sb.append(parameters.get(PluginConstants.PROPERTY_XSL_PATH));
-
+        int configs_count = Integer.parseInt(parameters.get(PluginConstants.PROPERTY_CONFIGS_COUNT));
+        for(int i=0; i < configs_count ; i++) {
+            sb.append("\n Config " + (i+1));
+            sb.append(" \n");
+            sb.append("- Input: ");
+            sb.append(parameters.get(PluginConstants.PROPERTY_INPUT_PATH + "_" + i));
+            sb.append(" \n");
+            sb.append("- Ouput: ");
+            sb.append(parameters.get(PluginConstants.PROPERTY_OUTPUT_PATH + "_" + i));
+            sb.append(" \n");
+            sb.append("- XSL File: ");
+            sb.append(parameters.get(PluginConstants.PROPERTY_XSL_PATH + "_" + i));
+        }
         return sb.toString();
     }
 
@@ -101,6 +104,7 @@ public class XsltRunnerRunType extends RunType {
     public Map<String, String> getDefaultRunnerProperties() {
         Map<String,String> defaults = new HashMap<String, String>();
 
+        defaults.put(PluginConstants.PROPERTY_CONFIGS_COUNT, "1");
         defaults.put(PluginConstants.PROPERTY_QUIT, "true");
         defaults.put(PluginConstants.PROPERTY_BATCH_MODE, "true");
         defaults.put(PluginConstants.PROPERTY_SHOW_ME, "true");

@@ -6,6 +6,9 @@ import jetbrains.buildServer.agent.runner.ProgramCommandLine;
 import jetbrains.buildServer.agent.runner.TerminationAction;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class XsltRunnerBuildService extends BuildServiceAdapter {
     private XsltRunner runner;
 
@@ -26,7 +29,7 @@ public class XsltRunnerBuildService extends BuildServiceAdapter {
     @NotNull
     @Override
     public ProgramCommandLine makeProgramCommandLine() throws RunBuildException {
-        return createProgramCommandline(runner.getExecutable(), runner.getArgs());
+        return createProgramCommandline("cmd.exe", runner.getArgs());
     }
 
     @NotNull
