@@ -15,7 +15,6 @@
     </td>
 </tr>
 
-
 <tr>
     <th>
         <label for="teamcity.build.workingDir">Working Directory: </label>
@@ -38,7 +37,8 @@
     String current_id = "configs_" + i;
 
     %>
-<tbody id=<%=current_id%>>
+
+<tbody style="border-style: dotted; border-width: 1px " id=<%=current_id%>>
 <tr>
     <th>
         <label for=<%= input_path %>>Input path: </label>
@@ -83,6 +83,6 @@
 <%-- HACK: save session on add/remove error because this jsp page on first load thru the runners dropdown will not load javascript, not sure why.. --%>
 <%-- In the add case, we update the configs_count so it appears like it worked, and then reload. for error, just save session and reload --%>
 <tr>
-<th id="config-adder"><a style="color: #ff8c00; font-weight:normal" href="#" onclick="try{ addConfig(); } catch(err) {   document.getElementById('argument.configs_count').value = 2; BS.EditBuildRunnerForm.saveInSession(); location.reload() } return false;">Add transform set</a></th>
-<td id="config-remover"><a style="color: #ff8c00; font-weight:normal" href="#" onclick="try{ removeConfig(); } catch(err) { BS.EditBuildRunnerForm.saveInSession(); location.reload() } return false;"">Remove transform set</a></td>
+<th id="config-adder"><a style="color: #ff8c00; font-weight:normal" href="#" onclick="try{ addConfig(); } catch(err) {   document.getElementById('argument.configs_count').value = 2; BS.EditBuildRunnerForm.saveInSession(); location.reload() } return false;">Add transform group</a></th>
+<td id="config-remover"><a style="color: #ff8c00; font-weight:normal" href="#" onclick="try{ removeConfig(); } catch(err) { BS.EditBuildRunnerForm.saveInSession(); location.reload() } return false;">Remove transform group</a></td>
 </tr>
