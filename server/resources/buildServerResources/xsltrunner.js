@@ -8,8 +8,8 @@
             return false;
 
 
-        var configs = document.getElementById("configs_0");
-        var copy = configs.outerHTML.replace(new RegExp("_0", 'g'), "_"+configs_count);
+        var configs = document.getElementById("configs"+"_"+(configs_count-1));
+        var copy = configs.outerHTML.replace(new RegExp("_"+(configs_count-1), 'g'), "_"+configs_count);
         configs.insertAdjacentHTML('afterend', copy)
 
         configs_count += 1;
